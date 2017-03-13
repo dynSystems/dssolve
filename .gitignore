@@ -1,0 +1,13 @@
+*.[oa]
+*.lo
+*.obj
+*.la
+*.a
+*.lib
+*.exe
+*.out
+*~
+*.kdev4
+.kdev4/
+build/
+
