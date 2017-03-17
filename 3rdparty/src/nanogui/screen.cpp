@@ -21,7 +21,7 @@
 
 #ifndef GL_GLEXT_PROTOTYPES
 #ifdef WIN32
-  PFNGLACTIVETEXTUREPROC glActiveTexture;
+  PFNGLACTIVETEXTUREPROC _glActiveTexture;
 #else
   typedef void (GLAPIENTRY *PFNGLGENVERTEXARRAYSPROC) (GLsizei n, GLuint* arrays);
   typedef void (GLAPIENTRY *PFNGLGENVERTEXARRAYSPROC) (GLsizei n, GLuint* arrays);
@@ -105,7 +105,7 @@
   PFNGLBINDBUFFERBASEPROC glBindBufferBase;
 #endif
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <nanovg/nanovg_gl.h>
 
 NAMESPACE_BEGIN(nanogui)
@@ -121,7 +121,8 @@ static void __initGl()
  #ifndef GL_GLEXT_PROTOTYPES
     #define ASSIGNGLFUNCTION(type,name) name = (type)SDL_GL_GetProcAddress( #name );
 #ifdef WIN32
-    ASSIGNGLFUNCTION(PFNGLACTIVETEXTUREPROC,glActiveTexture)
+    // ASSIGNGLFUNCTION(PFNGLACTIVETEXTUREPROC,glActiveTexture)
+	_glActiveTexture = (PFNGLACTIVETEXTUREPROC)SDL_GL_GetProcAddress("glActiveTexture");
 #endif
     ASSIGNGLFUNCTION(PFNGLCREATESHADERPROC,glCreateShader)
     ASSIGNGLFUNCTION(PFNGLSHADERSOURCEPROC,glShaderSource)

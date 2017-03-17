@@ -2,12 +2,11 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#ifdef _WIN32
-#include <windows.h>
+#if _WIN32
+#   include <Windows.h>
 #endif
-#include <GL/gl.h>
-#include <GL/glu.h>
 #include <SDL.h>
+#include "glad/glad.h"
 #include "kernel.hpp"
 
 int main( int argc, char* args[] )
@@ -22,6 +21,7 @@ int main( int argc, char* args[] )
 	Kernel* wnd = Kernel::getInstance();
 	
 	wnd->openWindow( "DSSolve", 640, 480, true );
+	wnd->startGui();
 	wnd->eventLoop();
 
 	return 0;

@@ -18,7 +18,7 @@
 #ifdef NANOGUI_LINUX
     #include <SDL2/SDL.h>
 #else
-    #include <SDL/SDL.h>
+    #include <SDL.h>
 #endif
 
 #include <map>

@@ -21,14 +21,14 @@
 namespace half_float { class half; }
 #endif
 
-extern PFNGLUNIFORM1IPROC glUniform1i ;
+/*extern PFNGLUNIFORM1IPROC glUniform1i ;
 extern PFNGLUNIFORM1FPROC glUniform1f ;
 extern PFNGLUNIFORM2IPROC glUniform2i ;
 extern PFNGLUNIFORM2FPROC glUniform2f ;
 extern PFNGLUNIFORM3FPROC glUniform3f ;
 extern PFNGLUNIFORM3IPROC glUniform3i ;
 extern PFNGLUNIFORM4FPROC glUniform4f ;
-extern PFNGLUNIFORM4IPROC glUniform4i ;
+extern PFNGLUNIFORM4IPROC glUniform4i ;*/
 
 NAMESPACE_BEGIN(nanogui)
 

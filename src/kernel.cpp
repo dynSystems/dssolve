@@ -1,14 +1,6 @@
-#ifdef _WIN32
-#include <windows.h>
-#endif
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <SDL.h>
-#include <string>
-#include <stdexcept>
 #include "kernel.hpp"
 
-Kernel::Kernel(): m_window(nullptr), m_screenSurface(nullptr), m_GLContext(nullptr), m_renderer(nullptr) {}
+Kernel::Kernel(): m_window(nullptr), m_screenSurface(nullptr), m_GLContext(nullptr), m_renderer(nullptr), m_Gui(nullptr) {}
 
 Kernel* Kernel:: getInstance( )
 {
@@ -46,8 +38,8 @@ void Kernel:: openWindow( std::string title, int width, int height, bool openGL,
 			if ( openGL )
 			{
 				openGLContext();
-				glClearColor(0,0,0,1);
-				glClear(GL_COLOR_BUFFER_BIT);
+//				glClearColor(0,0,0,1);
+//				glClear(GL_COLOR_BUFFER_BIT);
 			} else
 			{
 				m_renderer = SDL_CreateRenderer(m_window, -1, 0);
@@ -61,9 +53,25 @@ void Kernel:: openWindow( std::string title, int width, int height, bool openGL,
 	}
 }
 
-void Kernel:: openGLContext()
+void Kernel :: startGui()
+{
+	if ( m_window && m_GLContext )
+	{
+		m_Gui = new Gui(m_window, m_width, m_height);
+		m_Gui->addWindow("this is a test");
+	} else
+		throw(std::runtime_error(std::string("Did not have windows / GL context when attempting to create GUI! SDL_Error: ") + SDL_GetError()));
+}
+
+void Kernel :: openGLContext()
 {
 	m_GLContext = SDL_GL_CreateContext(m_window);
+
+	// Load the GL functions we need
+	if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress)) {
+		m_GLContext = nullptr;
+		throw(std::runtime_error(std::string("Failure importing GL routines via GLAD! SDL_Error: ") + SDL_GetError()));
+	}
 
 	if ( !m_GLContext )
 		throw( std::runtime_error( std::string( "Failed to create GL context! SDL_Error: " ) + SDL_GetError() ) );
@@ -94,8 +102,15 @@ void Kernel::eventLoop()
 			break;
 		}
 
+		drawGui();
 		swapBuffers();
 	}
+}
+
+void Kernel :: drawGui()
+{
+	if ( m_Gui )
+		m_Gui->draw();
 }
 
 void Kernel :: swapBuffers()
@@ -119,6 +134,12 @@ void Kernel :: closeWindow( )
 
 Kernel ::  ~Kernel()
 {
+	if ( m_Gui )
+	{
+		delete m_Gui;
+		m_Gui = nullptr;
+	}
+
 	closeWindow( );
 }
 

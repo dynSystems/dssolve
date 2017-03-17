@@ -17,8 +17,8 @@
     #include <SDL2/SDL_opengl.h>
     #include <SDL2/SDL_opengl_glext.h>
 #else
+	#include "glad/glad.h"
     #include <SDL_opengl.h>
-	#include "gl/glext.h"
 #endif
 
 #include <nanogui/common.h>

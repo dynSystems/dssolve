@@ -12,7 +12,7 @@
 #include <nanogui/checkbox.h>
 #include <nanogui/opengl.h>
 #include <nanovg/nanovg.h>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <nanogui/theme.h>
 #include <nanogui/entypo.h>
 #include <nanogui/serializer/core.h>

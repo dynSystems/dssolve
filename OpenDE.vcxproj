@@ -5,9 +5,17 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -21,10 +29,23 @@
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -34,7 +55,13 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -58,6 +85,24 @@
       <AdditionalDependencies>opengl32.lib glu32.lib /lib/SDL/x86/sdl2.lib /lib/SDL/x86/sdl2main.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories);.\3rdparty\include;.\3rdparty\include\nanovg</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;NANOVG_GL3_IMPLEMENTATION;EIGEN_DONT_ALIGN;GL_GLEXT_PROTOTYPES</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);opengl32.lib</AdditionalDependencies>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>opengl32.lib glu32.lib /lib/SDL/x86/sdl2.lib /lib/SDL/x86/sdl2main.lib</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -66,7 +111,30 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories);\src\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories);.\thirdparty\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);opengl32.lib</AdditionalDependencies>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>opengl32.lib glu32.lib /lib/SDL/x86/sdl2.lib /lib/SDL/x86/sdl2main.lib</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories);.\3rdparty\include;.\3rdparty\include\nanovg</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;NANOVG_GL3_IMPLEMENTATION;EIGEN_DONT_ALIGN;GL_GLEXT_PROTOTYPES</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -80,14 +148,99 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="3rdparty\src\glad\glad.c" />
+    <ClCompile Include="3rdparty\src\nanogui\button.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\checkbox.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\colorpicker.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\colorwheel.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\combobox.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\common.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\glutil.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\graph.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\imagepanel.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\imageview.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\label.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\layout.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\messagedialog.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\popup.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\popupbutton.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\progressbar.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\screen.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\serializer.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\slider.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\stackedwidget.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\tabheader.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\tabwidget.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\textbox.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\theme.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\vscrollpanel.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\widget.cpp" />
+    <ClCompile Include="3rdparty\src\nanogui\window.cpp" />
+    <ClCompile Include="3rdparty\src\nanovg\nanovg.c" />
+    <ClCompile Include="src\gui.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\window.cpp" />
+    <ClCompile Include="src\kernel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\window.hpp" />
+    <ClInclude Include="3rdparty\include\glad\glad.h" />
+    <ClInclude Include="3rdparty\include\nanogui\button.h" />
+    <ClInclude Include="3rdparty\include\nanogui\checkbox.h" />
+    <ClInclude Include="3rdparty\include\nanogui\colorpicker.h" />
+    <ClInclude Include="3rdparty\include\nanogui\colorwheel.h" />
+    <ClInclude Include="3rdparty\include\nanogui\combobox.h" />
+    <ClInclude Include="3rdparty\include\nanogui\common.h" />
+    <ClInclude Include="3rdparty\include\nanogui\compat.h" />
+    <ClInclude Include="3rdparty\include\nanogui\entypo.h" />
+    <ClInclude Include="3rdparty\include\nanogui\formhelper.h" />
+    <ClInclude Include="3rdparty\include\nanogui\glutil.h" />
+    <ClInclude Include="3rdparty\include\nanogui\graph.h" />
+    <ClInclude Include="3rdparty\include\nanogui\imagepanel.h" />
+    <ClInclude Include="3rdparty\include\nanogui\imageview.h" />
+    <ClInclude Include="3rdparty\include\nanogui\label.h" />
+    <ClInclude Include="3rdparty\include\nanogui\layout.h" />
+    <ClInclude Include="3rdparty\include\nanogui\messagedialog.h" />
+    <ClInclude Include="3rdparty\include\nanogui\nanogui.h" />
+    <ClInclude Include="3rdparty\include\nanogui\object.h" />
+    <ClInclude Include="3rdparty\include\nanogui\opengl.h" />
+    <ClInclude Include="3rdparty\include\nanogui\popup.h" />
+    <ClInclude Include="3rdparty\include\nanogui\popupbutton.h" />
+    <ClInclude Include="3rdparty\include\nanogui\progressbar.h" />
+    <ClInclude Include="3rdparty\include\nanogui\screen.h" />
+    <ClInclude Include="3rdparty\include\nanogui\slider.h" />
+    <ClInclude Include="3rdparty\include\nanogui\stackedwidget.h" />
+    <ClInclude Include="3rdparty\include\nanogui\tabheader.h" />
+    <ClInclude Include="3rdparty\include\nanogui\tabwidget.h" />
+    <ClInclude Include="3rdparty\include\nanogui\textbox.h" />
+    <ClInclude Include="3rdparty\include\nanogui\theme.h" />
+    <ClInclude Include="3rdparty\include\nanogui\toolbutton.h" />
+    <ClInclude Include="3rdparty\include\nanogui\vscrollpanel.h" />
+    <ClInclude Include="3rdparty\include\nanogui\widget.h" />
+    <ClInclude Include="3rdparty\include\nanogui\window.h" />
+    <ClInclude Include="3rdparty\include\nanovg\fontstash.h" />
+    <ClInclude Include="3rdparty\include\nanovg\nanovg.h" />
+    <ClInclude Include="3rdparty\include\nanovg\nanovg_gl.h" />
+    <ClInclude Include="3rdparty\include\nanovg\nanovg_gl_utils.h" />
+    <ClInclude Include="3rdparty\include\nanovg\stb_image.h" />
+    <ClInclude Include="3rdparty\include\nanovg\stb_truetype.h" />
+    <ClInclude Include="3rdparty\include\SymbolicCpp\array.h" />
+    <ClInclude Include="3rdparty\include\SymbolicCpp\cloning.h" />
+    <ClInclude Include="3rdparty\include\SymbolicCpp\derive.h" />
+    <ClInclude Include="3rdparty\include\SymbolicCpp\identity.h" />
+    <ClInclude Include="3rdparty\include\SymbolicCpp\matnorm.h" />
+    <ClInclude Include="3rdparty\include\SymbolicCpp\matrix.h" />
+    <ClInclude Include="3rdparty\include\SymbolicCpp\multinomial.h" />
+    <ClInclude Include="3rdparty\include\SymbolicCpp\polynomial.h" />
+    <ClInclude Include="3rdparty\include\SymbolicCpp\quatern.h" />
+    <ClInclude Include="3rdparty\include\SymbolicCpp\rational.h" />
+    <ClInclude Include="3rdparty\include\SymbolicCpp\symbolicc++.h" />
+    <ClInclude Include="3rdparty\include\SymbolicCpp\vecnorm.h" />
+    <ClInclude Include="3rdparty\include\SymbolicCpp\vector.h" />
+    <ClInclude Include="3rdparty\include\SymbolicCpp\verylong.h" />
+    <ClInclude Include="src\gui.hpp" />
+    <ClInclude Include="src\kernel.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

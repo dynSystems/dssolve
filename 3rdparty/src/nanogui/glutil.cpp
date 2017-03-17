@@ -14,7 +14,7 @@
 #include <iostream>
 #include <fstream>
 
-
+/*
 extern PFNGLCREATESHADERPROC glCreateShader;
 extern PFNGLSHADERSOURCEPROC glShaderSource;
 extern PFNGLCOMPILESHADERPROC glCompileShader;
@@ -59,6 +59,7 @@ extern PFNGLCREATEPROGRAMPROC glCreateProgram;
 extern PFNGLATTACHSHADERPROC glAttachShader;
 extern PFNGLUSEPROGRAMPROC glUseProgram;
 extern PFNGLBINDBUFFERBASEPROC glBindBufferBase;
+*/
 
 NAMESPACE_BEGIN(nanogui)
 
@@ -559,7 +560,7 @@ void GLTexture::load(const std::string &filename) {
             break;
         case 1:
             internalFormat = GL_R8;
-            format = GL_R;
+            format = GL_RED;
             break;
         default:
             throw std::runtime_error("Unknown image format");

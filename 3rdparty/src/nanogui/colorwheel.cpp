@@ -14,7 +14,7 @@
 #include <nanogui/colorwheel.h>
 #include <nanogui/theme.h>
 #include <nanogui/opengl.h>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <nanogui/serializer/core.h>
 #include <Eigen/QR>
 #include <Eigen/Geometry>

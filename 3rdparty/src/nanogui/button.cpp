@@ -13,7 +13,7 @@
 #include <nanogui/theme.h>
 #include <nanogui/opengl.h>
 #include <nanovg/nanovg.h>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <nanogui/serializer/core.h>
 
 NAMESPACE_BEGIN(nanogui)

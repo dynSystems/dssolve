@@ -14,7 +14,7 @@
 #include <nanogui/imageview.h>
 #include <nanogui/window.h>
 #include <nanogui/screen.h>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <nanogui/theme.h>
 #include <cmath>
 
