@@ -1,4 +1,5 @@
 #include <string>
+#include <SDL.h>
 
 class Window
 {
@@ -18,7 +19,7 @@ class Window
 		Window(Window const&)         = delete;
 		void operator=(Window const&) = delete;
 
-		void openWindow(std::string title = "Window", int WIDTH = 640, int HEIGHT = 480, bool openGL = true, Uint32 flags=SDL_WINDOW_SHOWN|SDL_WINDOW_RESIZABLE);
+		void openWindow(std::string title = "Window", int width = 640, int height = 480, bool openGL = true, Uint32 flags=SDL_WINDOW_SHOWN|SDL_WINDOW_RESIZABLE);
 		void closeWindow();
 		void openGLContext();
 		void dropGLContext();

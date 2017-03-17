@@ -1,13 +1,13 @@
 #ifdef _WIN32
 #include <windows.h>
 #endif
-#include <gl/gl.h>
-#include <gl/glu.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 #include <SDL.h>
 #include <string>
 #include "window.hpp"
 
-Window :: Window(): m_window(NULL), m_screenSurface(NULL), m_GLContext(NULL), m_renderer(NULL) {}
+Window :: Window(): m_window(nullptr), m_screenSurface(nullptr), m_GLContext(nullptr), m_renderer(nullptr) {}
 
 Window* Window :: getInstance( )
 {
@@ -34,7 +34,7 @@ void Window :: openWindow( std::string title, int width, int height, bool openGL
 			flags = flags | SDL_WINDOW_OPENGL;
 
         m_window = SDL_CreateWindow( "SDL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_width, m_height, flags );
-        if( m_window == NULL )
+        if ( m_window == NULL )
 			throw( std::runtime_error( std::string( "SDL_CreateWindow failed! SDL_Error: " ) + SDL_GetError() ) );
         else
         {
@@ -98,4 +98,4 @@ Window ::  ~Window()
 	closeWindow( );
 }
 
-Window* Window::instance = NULL;
+Window* Window::instance = nullptr;
