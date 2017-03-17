@@ -5,19 +5,20 @@
 #include <GL/glu.h>
 #include <SDL.h>
 #include <string>
-#include "window.hpp"
+#include <stdexcept>
+#include "kernel.hpp"
 
-Window :: Window(): m_window(nullptr), m_screenSurface(nullptr), m_GLContext(nullptr), m_renderer(nullptr) {}
+Kernel::Kernel(): m_window(nullptr), m_screenSurface(nullptr), m_GLContext(nullptr), m_renderer(nullptr) {}
 
-Window* Window :: getInstance( )
+Kernel* Kernel:: getInstance( )
 {
 	if ( !instance )	
-		instance = new Window();
+		instance = new Kernel();
 
 	return instance;
 }
 
-void Window :: openWindow( std::string title, int width, int height, bool openGL, Uint32 flags )
+void Kernel:: openWindow( std::string title, int width, int height, bool openGL, Uint32 flags )
 {
 	if ( m_window )
 		throw( "Window already created" );
@@ -60,7 +61,7 @@ void Window :: openWindow( std::string title, int width, int height, bool openGL
 	}
 }
 
-void Window :: openGLContext()
+void Kernel:: openGLContext()
 {
 	m_GLContext = SDL_GL_CreateContext(m_window);
 
@@ -68,13 +69,36 @@ void Window :: openGLContext()
 		throw( std::runtime_error( std::string( "Failed to create GL context! SDL_Error: " ) + SDL_GetError() ) );
 }
 
-void Window :: dropGLContext()
+void Kernel:: dropGLContext()
 {
 	if (m_GLContext)
 		SDL_GL_DeleteContext(m_GLContext); 
 }
 
-void Window :: swapBuffers()
+void Kernel::eventLoop()
+{
+	bool done = false;
+	SDL_Event event;
+	while ((!done) && (SDL_WaitEvent(&event))) {
+		switch (event.type) {
+		case SDL_KEYDOWN:
+		{
+			SDL_Keycode key = event.key.keysym.sym;
+			if (key == SDLK_ESCAPE)
+				done = true;
+			break;
+		}
+
+		case SDL_QUIT:
+			done = true;
+			break;
+		}
+
+		swapBuffers();
+	}
+}
+
+void Kernel :: swapBuffers()
 {
 	if ( m_GLContext )
 		SDL_GL_SwapWindow(m_window);
@@ -84,7 +108,7 @@ void Window :: swapBuffers()
 		throw( std::runtime_error( "Attempted to swap buffers without renderer" ) );
 }
 
-void Window :: closeWindow( )
+void Kernel :: closeWindow( )
 {
 	if ( m_window )
 	{
@@ -93,9 +117,9 @@ void Window :: closeWindow( )
 	}
 }
 
-Window ::  ~Window()
+Kernel ::  ~Kernel()
 {
 	closeWindow( );
 }
 
-Window* Window::instance = nullptr;
+Kernel* Kernel::instance = nullptr;

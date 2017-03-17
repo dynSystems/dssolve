@@ -1,10 +1,10 @@
 #include <string>
 #include <SDL.h>
 
-class Window
+class Kernel
 {
 	private:
-		static Window*	instance;
+		static Kernel*	instance;
 		SDL_Window*		m_window;
 		SDL_Surface*	m_screenSurface;
 		SDL_GLContext	m_GLContext;
@@ -13,19 +13,20 @@ class Window
 		int				m_width;
 		int				m_height;
 
-		Window();
+		Kernel();
 
 	public:
-		Window(Window const&)         = delete;
-		void operator=(Window const&) = delete;
+		Kernel(Kernel const&)         = delete;
+		void operator=(Kernel const&) = delete;
 
 		void openWindow(std::string title = "Window", int width = 640, int height = 480, bool openGL = true, Uint32 flags=SDL_WINDOW_SHOWN|SDL_WINDOW_RESIZABLE);
 		void closeWindow();
 		void openGLContext();
 		void dropGLContext();
+		void eventLoop();
 		void swapBuffers();
 
-		static Window* getInstance( );
-		~Window();
+		static Kernel* getInstance( );
+		~Kernel();
 };
 

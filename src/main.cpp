@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <iostream>
+#include <vector>
+#include <string>
 #ifdef _WIN32
 #include <windows.h>
 #endif
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <SDL.h>
-#include "window.hpp"
+#include "kernel.hpp"
 
 int main( int argc, char* args[] )
 {   
@@ -17,30 +19,10 @@ int main( int argc, char* args[] )
 		return -1;
 	}
 
-	Window* wnd = Window::getInstance();
+	Kernel* wnd = Kernel::getInstance();
 	
 	wnd->openWindow( "DSSolve", 640, 480, true );
-
-	bool done = false;
-	SDL_Event event;
-	while ((!done) && (SDL_WaitEvent(&event))) {
-		switch (event.type) {
-			case SDL_KEYDOWN:
-			{
-				SDL_Keycode key = event.key.keysym.sym;
-				if ( key == SDLK_ESCAPE )
-					done = true;
-				break;
-			}
-
-			case SDL_QUIT:
-				done = true;
-				break;
-		}
-	}
-
-	delete wnd;
-	SDL_Quit();
+	wnd->eventLoop();
 
 	return 0;
 }
