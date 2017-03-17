@@ -102,6 +102,9 @@ void Kernel::eventLoop()
 			break;
 		}
 
+		if ( m_Gui )
+			m_Gui->passEvents(event);
+
 		drawGui();
 		swapBuffers();
 	}

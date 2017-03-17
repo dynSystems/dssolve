@@ -13,6 +13,11 @@ void Gui :: draw()
 	this->drawAll();
 }
 
+void Gui :: passEvents(SDL_Event& e)
+{
+	this->onEvent(e);
+}
+
 nanogui::ref<nanogui::Window> Gui::addWindow(std::string name, std::string title)
 {
 	if ( title.empty() )

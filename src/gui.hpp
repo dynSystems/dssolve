@@ -25,6 +25,7 @@ class Gui : public nanogui::Screen
 		nanogui::ref<nanogui::Window>	getWindow( std::string );
 
 		void draw();
+		void passEvents(SDL_Event& e);
 
 		virtual void draw(NVGcontext *ctx) {
 			Screen::draw(ctx);
