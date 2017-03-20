@@ -1,3 +1,4 @@
+#include <zmq.hpp>
 #include "kernel.hpp"
 
 Kernel::Kernel(): m_window(nullptr), m_screenSurface(nullptr), m_GLContext(nullptr), m_renderer(nullptr), m_Gui(nullptr) {}
@@ -85,28 +86,61 @@ void Kernel:: dropGLContext()
 
 void Kernel::eventLoop()
 {
+	// Setup zeromq context and socket and turn it in a zmq_pollitem_t
+	zmq::context_t context(1);
+	zmq::socket_t socket(context, ZMQ_REP);
+	socket.bind("tcp://*:5555");
+	zmq::pollitem_t connections [] = {
+		{socket, 0, ZMQ_POLLIN, 0}
+	};
+
 	bool done = false;
-	SDL_Event event;
-	while ((!done) && (SDL_WaitEvent(&event))) {
-		switch (event.type) {
-		case SDL_KEYDOWN:
-		{
-			SDL_Keycode key = event.key.keysym.sym;
-			if (key == SDLK_ESCAPE)
+	while (!done) {
+		SDL_Event event;
+		while (SDL_PollEvent(&event)) {
+			switch (event.type) {
+			case SDL_KEYDOWN:
+			{
+				SDL_Keycode key = event.key.keysym.sym;
+				if (key == SDLK_ESCAPE)
+					done = true;
+				break;
+			}
+
+			case SDL_QUIT:
 				done = true;
-			break;
+				break;
+			}
+
+			if ( m_Gui )
+				m_Gui->passEvents(event);
+
+			drawGui();
+			swapBuffers();
+
 		}
 
-		case SDL_QUIT:
-			done = true;
-			break;
+
+		// Poll zmq connections
+		// zmq::poll waits 40msec for events and thus sets the frame rate
+		try {
+			zmq::poll(&connections[0], 1, 40);
+		} catch(std::exception &ex) {
+			std::cout << ex.what() << std::endl << std::flush;
 		}
 
-		if ( m_Gui )
-			m_Gui->passEvents(event);
+		zmq::message_t message;
+		if ( connections[0].revents & ZMQ_POLLIN ) {
+			socket.recv( &message );
+			std::cout << message.size() << std::endl;
 
-		drawGui();
-		swapBuffers();
+			// Fire off threads
+
+			// Mandatory reply, otherwise client stays blocked.
+			zmq::message_t reply(4);
+			memcpy(reply.data(), "Done", 4);
+			socket.send(reply);
+		}
 	}
 }
 

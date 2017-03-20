@@ -10,6 +10,10 @@ file(GLOB NANOGUI_SOURCE ${3RDPARTY_SOURCE_DIR}/nanogui/*.cpp)
 # nanovg
 file(GLOB NANOVG_SOURCE ${3RDPARTY_SOURCE_DIR}/nanovg/*.c)
 
+# glad
+file(GLOB GLAD_SOURCE ${3RDPARTY_SOURCE_DIR}/glad/*.c)
+
+
 # dss
 set(DSS_SOURCE
                main.cpp
@@ -24,6 +28,7 @@ add_executable(dss
                    ${SCPP_SOURCE}
                    ${NANOGUI_SOURCE}
                    ${NANOVG_SOURCE}
+                   ${GLAD_SOURCE}
                    )
 
 
@@ -34,7 +39,7 @@ target_compile_options(dss
                            )
 
 target_compile_definitions(dss
-                               PRIVATE -DNANOVG_GL3_IMPLEMENTATION
+                               PRIVATE -DNANOVG_GL2_IMPLEMENTATION
                                PRIVATE -DGL_GLEXT_PROTOTYPES
                                PRIVATE -D_CRT_SECURE_NO_WARNINGS
                                )
@@ -61,10 +66,14 @@ find_package(SDL2 REQUIRED)
 # Find Eigen, header only
 find_package(Eigen REQUIRED)
 
+# Find ZeroMQ
+find_package(ZMQ REQUIRED)
+
 target_include_directories(dss PRIVATE
                                        ${OPENGL_INCLUDE_DIR}
                                        ${SDL2_INCLUDE_DIR}
                                        ${EIGEN_INCLUDE_DIRS}
+                                       ${ZMQ_INCLUDE_DIRS}
                                        ${3RDPARTY_INCLUDE_DIR}
                                        )
 
@@ -72,6 +81,7 @@ target_link_libraries(dss
                           Threads::Threads
                           ${OPENGL_gl_LIBRARY}
                           ${SDL2_LIBRARY}
+                          ${ZMQ_LIBRARIES}
                           )
 
 
