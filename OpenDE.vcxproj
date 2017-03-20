@@ -91,7 +91,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories);.\3rdparty\include;.\3rdparty\include\nanovg</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories);.\3rdparty\include;.\3rdparty\include\nanovg;.\3rdparty\include\SymbolicCpp</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;NANOVG_GL3_IMPLEMENTATION;EIGEN_DONT_ALIGN;GL_GLEXT_PROTOTYPES</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -133,7 +133,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories);.\3rdparty\include;.\3rdparty\include\nanovg</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories);.\3rdparty\include;.\3rdparty\include\nanovg;.\3rdparty\include\SymbolicCpp</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;NANOVG_GL3_IMPLEMENTATION;EIGEN_DONT_ALIGN;GL_GLEXT_PROTOTYPES</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -177,6 +177,32 @@
     <ClCompile Include="3rdparty\src\nanogui\widget.cpp" />
     <ClCompile Include="3rdparty\src\nanogui\window.cpp" />
     <ClCompile Include="3rdparty\src\nanovg\nanovg.c" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\array.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\cloning.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\constants.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\derive.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\equation.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\functions.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\identity.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\integrate.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\matnorm.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\matrix.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\multinomial.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\number.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\polynomial.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\product.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\quatern.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\rational.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\solve.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\sum.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\symbol.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\symbolic.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\symbolicc++.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\symerror.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\symmatrix.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\vecnorm.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\vector.cpp" />
+    <ClCompile Include="3rdparty\src\SymbolicCpp\verylong.cpp" />
     <ClCompile Include="src\gui.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\kernel.cpp" />
