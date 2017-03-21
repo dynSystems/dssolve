@@ -977,6 +977,8 @@ typedef GLintptr GLvdpauSurfaceNV;
 #define GL_TIME_ELAPSED 0x88BF
 #define GL_TIMESTAMP 0x8E28
 #define GL_INT_2_10_10_10_REV 0x8D9F
+#define GL_GENERATE_MIPMAP 0x8191
+/* Was manually added */
 #ifndef GL_VERSION_1_0
 #define GL_VERSION_1_0 1
 GLAPI int GLAD_GL_VERSION_1_0;
