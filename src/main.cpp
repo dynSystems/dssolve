@@ -8,7 +8,7 @@
 #include <SDL.h>
 #include "glad/glad.h"
 #include "kernel.hpp"
-#include "SymbolicCpp\symbolicc++.h"
+#include "SymbolicCpp/symbolicc++.h"
 
 int main( int argc, char* args[] )
 {   
