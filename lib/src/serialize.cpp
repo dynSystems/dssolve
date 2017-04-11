@@ -1,5 +1,4 @@
 #include "serialize.hpp"
-#include "exceptions.hpp"
 
 /**
  * Create an Envelope for a message.

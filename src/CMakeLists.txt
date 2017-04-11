@@ -34,7 +34,7 @@ add_executable(dss
 
 ## Compile options and preprocessor defines
 target_compile_options(dss
-                           PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-std=c++14> $<$<COMPILE_LANGUAGE:C>:-std=c99>
+                           PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-std=c++14> $<$<COMPILE_LANGUAGE:C>:-std=c11>
                            PRIVATE -pthread
                            )
 
@@ -84,6 +84,5 @@ target_link_libraries(dss
                           ${ZMQ_LIBRARIES}
                           )
 
-
 ## Installation
-install(TARGETS dss RUNTIME DESTINATION bin)
+install(TARGETS dss RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
