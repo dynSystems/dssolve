@@ -1,7 +1,5 @@
-enable_testing()
 find_package(GTest REQUIRED)
 find_package(GMock REQUIRED)
-find_package(Dsser REQUIRED)
 
 add_executable(serializationTest serializationTest.cpp)
 target_include_directories(serializationTest PRIVATE
@@ -13,6 +11,8 @@ target_include_directories(serializationTest PRIVATE
 target_link_libraries(serializationTest
                                         ${GTEST_LIBRARIES}
                                         ${GMOCK_BOTH_LIBRARIES}
-                                        ${DSSER_LIBRARIES})
+                                        dsexct
+                                        dsser
+                                        )
 
-add_test(NAME AllTests COMMAND serializationTest WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/tests)
+add_test(NAME LibraryTests COMMAND serializationTest WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
